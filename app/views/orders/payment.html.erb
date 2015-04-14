@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PAYMENT</title>
+</head>
+
+<body style="padding-left:120px;">
+<h2>Pay using your credit/debit card</h2>
+<%= form_tag do %>
+  <dl>
+    <dt><%= label_tag 'card_number' %></dt>
+    <dd><%= text_field_tag 'card_number' %></dd>
+    <dt><%= label_tag 'expiry' %></dt>
+    <dd><%= text_field_tag 'expiry Date' %></dd>
+    <dt><%= label_tag 'security_code' %></dt>
+    <dd><%= text_field_tag 'security_code' %></dd>
+    <br><br>
+    <dd><%= submit_tag "Review Your Order" %></dd>
+  </dl>
+<% end %>
+</body>
+</html>

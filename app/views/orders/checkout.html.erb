@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CHECKOUT</title>
+<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+<link type="text/css" rel="stylesheet" href="application.css"/>
+<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+</head>
+<body style="padding-left:120px;">
+
+
+<h2>Place your order</h2>
+<p>Fantastic! You're ready to place your order, just follow the instructions below and we'll get your products shipped to you as quickly as we can.</p>
+<h4>Review the products in your shopping bag</h4><br>
+<div class="checkout">
+<%= render 'items', :order => @order %>
+
+<%= form_for @order, :url => checkout_path do |f| %>
+     <% if @order.errors.any? %>
+     <br><br>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this model from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br><br>
+  <h4>Complete your details below to complete your order</h4>
+  <dl>
+    <div class = "pull-left">
+    <dt><%= f.label :first_name, 'Name' %></dt><br>
+    <dd id="name"><%= f.text_field :first_name, placeholder: 'First Name' %> <%= f.text_field :last_name, placeholder: 'Last Name' %></dd>
+    <br><br>
+    <dt><%= f.label :company, 'Company Name (optional)' %></dt>
+    <dd><%= f.text_field :company, placeholder: 'Company Name' %></dd>
+    <br>
+    <dt><%= f.label :email_address %></dt>
+    <dd><%= f.text_field :email_address, placeholder: 'E-mail' %></dd>
+    <br>
+    <dt><%= f.label :phone_number %></dt>
+    <dd><%= f.text_field :phone_number, placeholder: 'Phone Number' %></dd><br><br><br>
+    </div>
+    <div class="col-md-4">
+    <dt><%= f.label :billing_address1, 'Address' %></dt>
+    <dd><%= f.text_field :billing_address1, placeholder: 'Line 1' %></dd>
+    <dd><%= f.text_field :billing_address2, placeholder: 'Line 2' %></dd>
+    <dd><%= f.text_field :billing_address3, placeholder: 'Town' %></dd>    
+    <dd><%= f.text_field :billing_address4, placeholder: 'Country' %></dd>
+    <dd><%= f.text_field :billing_postcode, placeholder: 'postcode' %></dd>
+    <dd><%= f.collection_select :billing_country_id, Shoppe::Country.ordered, :id, :name, :include_blank => true %></dd>
+    <br>
+    <div class="btn">
+    <dd><%= f.submit 'Continue to payment' %></dd>
+    </div>
+  </dl>
+  </div>
+<% end %>
+</div>
+
+</body>
+</html>

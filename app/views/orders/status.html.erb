@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PRODUCT STATUS</title>
+<link rel="stylesheet" href="application.css">
+</head>
+
+<body style="padding-left:130px;">
+
+ <% @orders.each do |order| %>
+ 
+ <div style="border:2px solid black;padding-left:120px">
+ 
+    <div class= "pull-left">
+    
+    <br><br><br>first name: <%= order.first_name %><br>
+    last name: <%= order.last_name %><br>
+    company: <%= order.company %><br>
+    billing address: <%= order.billing_address1 %><br>
+    <%= order.billing_address2%><br>
+    <%= order.billing_address3 %><br>
+    <%= order.billing_address4 %><br>
+    <%= order.billing_postcode %><br>
+    <%= order.billing_country.name%><br>
+    </div>
+    <div style="padding-left:500px;">
+    <br><br><br>email: <%= order.email_address %><br>
+    phone number: <%= order.phone_number %><br>
+    Order Received: <%=order.received_at%>    
+
+    </div>
+    <br><br><br>
+    <br><br><br><br><br><div class="status">
+    status order: <%= order.status %><br>
+    consignment number(tracking number): <%= order.consignment_number %><br></p>
+    </div>
+    <br><br><table width='70%' border='1' margin-bottom='30%'>
+  <thead>
+    <tr>
+      <td>Quantity</td>
+      <td>Product</td>
+      <td>Sub-Total</td>
+      <td>Tax</td>
+      <td>Total</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% order.order_items.each do |item| %>
+    <tr>
+      <td><%= item.quantity %></td>
+      <td><%= item.ordered_item.full_name %></td>
+      <td><%= number_to_currency item.sub_total %></td>
+      <td><%= number_to_currency item.tax_amount %></td>
+      <td><%= number_to_currency item.total %></td>
+    </tr>
+    <% end %>
+    
+    <% if order.delivery_service %>
+    <tr>
+      <td></td>
+      <td><%= order.delivery_service.name %></td>
+      <td><%= number_to_currency order.delivery_price %></td>
+      <td><%= number_to_currency order.delivery_tax_amount %></td>
+      <td><%= number_to_currency order.delivery_price + order.delivery_tax_amount %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan='4'><p style="margin-left:700px;">Sub-Total<p></td>
+      <td><%= number_to_currency order.total_before_tax %></td>
+    </tr>
+    <tr>
+      <td colspan='4'><p style="margin-left:737px;">Tax</p></td>
+      <td><%= number_to_currency order.tax %></td>
+    </tr>
+    <tr>
+      <td colspan='4'><p style="margin-left:729.5px;">Total</p></td>
+      <td><%= number_to_currency order.total %>
+    </tr>
+  </tfoot>
+</table>
+<br><br></div><br>
+ <% end %>
+ </body>
+ </html>

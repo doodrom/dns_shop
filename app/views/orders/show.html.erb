@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your shopping bag</title>
+<body style="padding-left:120px;">
+<h2>Your shopping bag</h2>
+<p>The items listed below are currently in your shopping bag. 
+If you're ready to place your order just click the 'Checkout' button 
+and we'll ask for a few details and place the order.</p>
+<%= render 'items', :order => current_order %>
+<br>
+<p><%= link_to 'Empty basket', basket_path, :method => :delete %></p>
+</body>

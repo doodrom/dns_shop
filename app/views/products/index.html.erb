@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DNS SHOP</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="application.css">
+</head>
+<body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>DNS VAULT</h1>
+        <p>DNS Management Made Easy.</p>
+        <a href="http://www.dnsvault.net">Meet DNSVault</a>
+      </div >
+    </div> 
+    <div class="neighborhood-guides">
+        <div class="container">
+            <h2>Our Product</h2>
+            <p>DNSVault is a DNS management appliance.</p> 
+            <p>Easy to use, secure and reliable, for your business need.</p> 
+            <p>IPv6 ready and BIND compatible.</p> 
+            <p>The best DNS Management Solutions you can get for your business.</p>
+            
+    <div class="row">
+      <div class="col-md-4">
+        <div class="thumbnail">
+        <img src="">
+        </div>
+        <div class="thumbnail">
+        <img src="">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="thumbnail">
+        <img src="">
+        </div>
+        <div class="thumbnail">
+        <img src="">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+      <div class="thumbnail">
+        <img src="">
+        </div>
+      </div>
+    </div>
+        </div>
+    </div>
+    <div class="learn-more">
+	  <div class="container">
+		<div class="row">
+	      <div class="col-md-4">
+                <% @products.each do |category, products| %>
+                    <h2><%= category.name %></h2>
+                    <ul>
+                        <% products.each do |product| %>
+                    <li>
+                        <h4><%= link_to product.name, product_path(product.permalink) %></h4>
+                        <p><%= product.short_description %></p>
+                        <p><b>Price: <%= number_to_currency product.price %></b></p>
+                    </li>
+                        <% end %>
+                    </ul>
+                <% end %>
+			<h3></h3>
+			<p></p>
+			<p><a href="#"></a></p>
+	      </div>
+		  <div class="col-md-4">
+			<h3></h3>
+			<p></p>
+			<p><a href="#"></a></p>
+		  </div>
+		<h3></h3>
+			<p></p>
+			<p><a href="#"></a></p>
+		  </div>
+	    </div>
+	  </div>
+	</div>
+
+</body>
+</html>

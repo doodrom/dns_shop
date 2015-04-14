@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PRODUCT</title>
+</head>
+
+<body style="padding-left:120px;">
+<h2><%= @product.name %></h2>
+
+<% if @product.default_image %>
+  <%= image_tag @product.default_image.path, :width => '200px', :style => "float:right" %>
+<% end %>
+
+<p><%= @product.short_description %></p>
+<p>
+  <b><%= number_to_currency @product.price %></b><br>
+  
+  
+  <% if @product.stock == 0 %>
+    <p style="color:red;"> Sorry, we are out of stock! </p>
+  <% else %>
+  <i class="fa fa-shopping-cart"></i>
+  <%= select_tag 'stock', options_for_select((1..@product.stock).to_a), id:"stock"%>
+  <%= link_to "Add to basket", product_path(@product.permalink, stock:  1), :method => :post, id:"basket" %>
+  <% end %>
+</p>
+<hr>
+<%= simple_format @product.description %>
+<hr>
+
+<p><%= link_to "Back to list", root_path %></p>
+</body>
+
+<script>
+$('#stock').on('change', function() {
+  var url_stock = $('#basket').attr('href')
+  $('#basket').attr('href', url_stock.replace(/stock=[^&]+/, 'stock='+this.value))
+});
+</script>
